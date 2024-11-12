@@ -6,22 +6,138 @@
   justify-content: center;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  position: relative;
-  width: 350px;
+.cardContent {
+  width: 300px;
+  display: grid;
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  place-items: center;
+  text-align: center;
+  box-shadow: var(--shadow);
   height: 350px;
+  background-size: cover;
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+    rotateY(var(--rotateY));
+  transition: all 0.35s ease-in-out;
+  position: relative;
+
+  overflow: hidden;
+  border-radius: 16px;
 }
 
-.cardImage {
+.cardContent > img {
+  border-radius: 16px;
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 16px;
+}
+
+.cardContent > div {
+  z-index: 3;
+  align-self: flex-end;
+  backdrop-filter: blur(5px);
+  width: 100%;
+}
+
+.cardContent > div > p {
+  color: rgba(255, 255, 255, 0.8);
+  padding-bottom: 2px;
+}
+
+.cardContent > div > h4 {
+  padding: 10px;
+  font-weight: 400;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.cardWrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  transition: all 0.1s ease;
+}
+
+.blurred .cardContent {
+  filter: blur(5px);
+}
+
+.mousePositionTracker {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.mousePositionTracker:nth-child(1):hover ~ .cardContent {
+  --rotateX: var(--angle);
+
+  --rotateY: calc(var(--angle) * -1);
+}
+
+.mousePositionTracker:nth-child(2):hover ~ .cardContent {
+  --rotateX: var(--angle);
+}
+
+.mousePositionTracker:nth-child(3):hover ~ .cardContent {
+  --rotateX: var(--angle);
+  --rotateY: var(--angle);
+}
+
+.mousePositionTracker:nth-child(4):hover ~ .cardContent {
+  --rotateY: calc(var(--angle) * -1);
+}
+
+.mousePositionTracker:nth-child(6):hover ~ .cardContent {
+  --rotateY: var(--angle);
+}
+
+.mousePositionTracker:nth-child(7):hover ~ .cardContent {
+  --rotateX: calc(var(--angle) * -1);
+  --rotateY: calc(var(--angle) * -1);
+}
+
+.mousePositionTracker:nth-child(8):hover ~ .cardContent {
+  --rotateX: calc(var(--angle) * -1);
+}
+
+.mousePositionTracker:nth-child(9):hover ~ .cardContent {
+  --rotateX: calc(var(--angle) * -1);
+  --rotateY: var(--angle);
+}
+
+/* 1th, 4th, 7th */
+.mousePositionTracker:nth-of-type(3n - 2) {
+  grid-column: 1/2;
+}
+
+/* 2th, 5th, 8th */
+.mousePositionTracker:nth-of-type(3n - 1) {
+  grid-column: 2/3;
+}
+
+/* 3th, 6th, 9th */
+.mousePositionTracker:nth-of-type(3n) {
+  grid-column: 3/4;
+}
+/* 1-3 */
+.mousePositionTracker:nth-child(n + 1):nth-child(-n + 3) {
+  grid-row: 1 / 2;
+}
+
+/* 4-6 */
+.mousePositionTracker:nth-child(n + 4):nth-child(-n + 6) {
+  grid-row: 2 / 3;
+}
+
+/* 7-9 */
+.mousePositionTracker:nth-child(n + 7):nth-child(-n + 9) {
+  grid-row: 3/ 4;
 }
