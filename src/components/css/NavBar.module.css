@@ -1,0 +1,44 @@
+.navbar {
+  padding: 5px 25px;
+  height: 100px;
+  color: var(--main-white);
+  -webkit-box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.45);
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 20;
+  background: rgb(18, 18, 18);
+  background: linear-gradient(
+    90deg,
+    rgba(18, 18, 18, 1) 0%,
+    rgba(23, 23, 23, 1) 49%,
+    rgba(36, 33, 33, 1) 100%
+  );
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+}
+
+.logoWrapper {
+  display: flex;
+  gap: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+}
+
+.userDiv {
+  display: flex;
+  justify-content: center;
+}
