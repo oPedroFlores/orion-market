@@ -38,7 +38,12 @@ export default function Home() {
           ))}
         </div>
 
-        {currentItems && <SelectorWrapper currentItems={currentItems} />}
+        {currentItems && (
+          <SelectorWrapper
+            key={selectorKeys[currentSelector]}
+            currentItems={currentItems}
+          />
+        )}
       </section>
     </>
   );
