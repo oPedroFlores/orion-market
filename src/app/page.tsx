@@ -17,7 +17,6 @@ interface SelectorsJsonType {
 
 export default function Home() {
   const [currentSelector, setCurrentSelector] = useState(0);
-  const selectorsJson: SelectorsJsonType = SelectorsJson;
 
   // Mapeamento das chaves do JSON para os seletores
   const selectorKeys: (keyof SelectorsJsonType)[] = [

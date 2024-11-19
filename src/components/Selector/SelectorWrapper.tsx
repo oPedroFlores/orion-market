@@ -17,7 +17,8 @@ const SelectorWrapper: React.FC<SelectorWrapperProps> = ({ currentItems }) => {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-
+  console.log("Can Scroll Left:", canScrollLeft);
+  console.log("Can Scroll Right:", canScrollRight);
   const updateScrollState = () => {
     if (wrapperRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = wrapperRef.current;
