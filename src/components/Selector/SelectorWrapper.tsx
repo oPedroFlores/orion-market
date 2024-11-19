@@ -3,10 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./Selector.module.css";
 import SelectorCard from "./SelectorCard";
 
-interface CurrentItems {
-  items: string[]; // Ou apenas use string[] diretamente
-}
-
 interface SelectorWrapperProps {
   currentItems: string[];
 }
