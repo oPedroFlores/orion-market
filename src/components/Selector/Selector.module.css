@@ -16,6 +16,13 @@
   border: none;
   outline: none;
   cursor: pointer;
+  width: 40px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .prevButton {
@@ -24,6 +31,38 @@
 
 .nextButton {
   right: 0;
+}
+
+.arrow {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+}
+
+.prevArrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid #fff; /* Cor da seta */
+  border-bottom: 2px solid #fff;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.nextArrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #fff; /* Cor da seta */
+  border-top: 2px solid #fff;
+  transform: translate(-50%, -50%) rotate(0deg);
 }
 
 .selectorWrapper {
@@ -51,9 +90,11 @@
     rotateY(var(--rotateY));
   transition: all 0.35s ease-in-out;
   position: relative;
-
   overflow: hidden;
   border-radius: 16px;
+  -webkit-box-shadow: 15px 15px 18px -11px rgba(40, 40, 71, 1);
+  -moz-box-shadow: 15px 15px 18px -11px rgba(40, 40, 71, 1);
+  box-shadow: 15px 15px 18px -11px rgba(40, 40, 71, 1);
 }
 
 .cardContent > img {

@@ -1,8 +1,8 @@
 // SelectorCard.jsx
-'use client';
-import React, { useEffect, useState } from 'react';
-import styles from './Selector.module.css';
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useState } from "react";
+import styles from "./Selector.module.css";
+import Image from "next/image";
 
 interface SelectorCardProps {
   selected: string;
@@ -35,7 +35,7 @@ const SelectorCard: React.FC<SelectorCardProps> = ({
         const jsonData = await import(`@/JSON/Collections/${selected}.json`);
         setData(jsonData);
       } catch (error) {
-        console.error('Erro ao importar o JSON:', error);
+        console.error("Erro ao importar o JSON:", error);
       }
     };
 
@@ -48,7 +48,7 @@ const SelectorCard: React.FC<SelectorCardProps> = ({
       () => {
         setIsMounted(true);
       },
-      myIndex * 50 > 500 ? myIndex * 100 : 0,
+      myIndex * 50 > 500 ? myIndex * 100 : 0
     );
 
     return () => clearTimeout(timer);
@@ -60,8 +60,8 @@ const SelectorCard: React.FC<SelectorCardProps> = ({
 
   return (
     <div
-      className={`${styles.cardWrapper} ${isBlurred ? styles.blurred : ''} ${
-        isMounted ? 'animeLeft' : ''
+      className={`${styles.cardWrapper} ${isBlurred ? styles.blurred : ""} ${
+        isMounted ? "animeLeft" : ""
       }`}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}

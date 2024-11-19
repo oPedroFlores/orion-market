@@ -1,45 +1,45 @@
-'use client';
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './Selector.module.css';
-import SelectorCard from './SelectorCard';
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import styles from "./Selector.module.css";
+import SelectorCard from "./SelectorCard";
 
 interface CurrentItems {
-  [key: string]: string[];
+  items: string[]; // Ou apenas use string[] diretamente
 }
 
-const SelectorWrapper = ({ currentItems }: { currentItems: CurrentItems }) => {
+interface SelectorWrapperProps {
+  currentItems: string[];
+}
+
+const SelectorWrapper: React.FC<SelectorWrapperProps> = ({ currentItems }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Atualizar estado de scroll
   const updateScrollState = () => {
     if (wrapperRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = wrapperRef.current;
       setCanScrollLeft(scrollLeft > 0);
-
-      setCanScrollRight(scrollWidth <= scrollWidth - clientWidth);
+      setCanScrollRight(scrollWidth > scrollLeft + clientWidth);
     }
   };
 
-  // Atualizar scroll state ao montar e ao trocar `currentItems`
   useEffect(() => {
     updateScrollState();
 
     const wrapper = wrapperRef.current;
-    wrapper?.addEventListener('scroll', updateScrollState);
+    wrapper?.addEventListener("scroll", updateScrollState);
 
     return () => {
-      wrapper?.removeEventListener('scroll', updateScrollState);
+      wrapper?.removeEventListener("scroll", updateScrollState);
     };
-  }, [currentItems]); // Escuta mudanças em `currentItems`
+  }, [currentItems]);
 
-  // Garantir que o scrollLeft seja resetado ao mudar `currentItems`
   useEffect(() => {
     if (wrapperRef.current) {
-      wrapperRef.current.scrollLeft = 0; // Reseta o scroll ao mudar conteúdo
+      wrapperRef.current.scrollLeft = 0;
       updateScrollState();
     }
   }, [currentItems]);
@@ -49,7 +49,7 @@ const SelectorWrapper = ({ currentItems }: { currentItems: CurrentItems }) => {
       const { clientWidth } = wrapperRef.current;
       wrapperRef.current.scrollBy({
         left: clientWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -59,7 +59,7 @@ const SelectorWrapper = ({ currentItems }: { currentItems: CurrentItems }) => {
       const { clientWidth } = wrapperRef.current;
       wrapperRef.current.scrollBy({
         left: -clientWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -69,9 +69,8 @@ const SelectorWrapper = ({ currentItems }: { currentItems: CurrentItems }) => {
       <button
         className={`${styles.prevButton} ${styles.button}`}
         onClick={handlePrev}
-        // disabled={!canScrollLeft} // Disable if can't scroll left
       >
-        PREV
+        <span className={`${styles.arrow} ${styles.prevArrow}`}></span>
       </button>
       <div className={styles.selectorWrapper} ref={wrapperRef}>
         {currentItems.map((item: string, index: number) => (
@@ -88,9 +87,8 @@ const SelectorWrapper = ({ currentItems }: { currentItems: CurrentItems }) => {
       <button
         className={`${styles.nextButton} ${styles.button}`}
         onClick={handleNext}
-        // disabled={!canScrollRight}
       >
-        NEXT
+        <span className={`${styles.arrow} ${styles.nextArrow}`}></span>
       </button>
     </div>
   );
